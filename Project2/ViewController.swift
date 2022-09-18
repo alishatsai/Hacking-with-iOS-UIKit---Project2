@@ -23,7 +23,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         countries += ["estonia","france","germany","ireland","italy","monaco","nigeria","poland","russia","uk","us"]
     }
-
+    func askQuestion() {
+        button1.setImage(UIImage(named: countries[0]), for: .normal)
+        button2.setImage(UIImage(named: countries[1]), for: .normal)
+        button3.setImage(UIImage(named: countries[2]), for: .normal)
+    }
 
 }
 
