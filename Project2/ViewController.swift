@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet var button1: UIButton!
     
     @IBOutlet var button2: UIButton!
@@ -44,6 +44,8 @@ class ViewController: UIViewController {
         button2.setImage(UIImage(named: countries[1]), for: .normal)
         button3.setImage(UIImage(named: countries[2]), for: .normal)
     }
-
+    @IBAction func buttonTapped(_ sender: UIButton) {
+    }
+    
 }
 
