@@ -56,6 +56,8 @@ class ViewController: UIViewController {
         }
         
         let ac = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
+        //Place askQuestion rather than askQuestion() in handler can lead player to the next game. But if we place askQuestion() in handler just excute method. Besides handler need a closure.
+        //handler內放置askQuestion而不是askQuestion()的原因是，askQuestion()是程式執行的結果，但handler裡面是要放一個closure，如此一來玩家才可以再玩下一關
         ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
         present(ac, animated: true)
     }
