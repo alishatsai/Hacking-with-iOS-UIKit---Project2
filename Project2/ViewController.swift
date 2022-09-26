@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         // shuffle before setImage
         countries.shuffle()
         
-        title = countries[correctAnswer].uppercased()
+        title = "Score: \(score)  Which flag is "+countries[correctAnswer].uppercased()+"?"
         
         button1.setImage(UIImage(named: countries[0]), for: .normal)
         button2.setImage(UIImage(named: countries[1]), for: .normal)
