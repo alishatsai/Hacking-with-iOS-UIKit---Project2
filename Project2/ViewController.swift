@@ -32,9 +32,9 @@ class ViewController: UIViewController {
         button2.layer.borderColor = UIColor.lightGray.cgColor
         button3.layer.borderColor = UIColor.lightGray.cgColor
         
-        askQuestion()
+        askQuestion(action: nil)
     }
-    func askQuestion() {
+    func askQuestion(action: UIAlertAction!) {
         // shuffle before setImage
         countries.shuffle()
         
