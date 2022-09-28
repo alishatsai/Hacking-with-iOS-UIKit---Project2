@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     var countries = [String]()
     var correctAnswer = 0
     var score = 0
-    
+    var currentQuestion = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,8 @@ class ViewController: UIViewController {
         // shuffle before setImage
         countries.shuffle()
         
-        title = "Score: \(score)  Which flag is "+countries[correctAnswer].uppercased()+"?"
+        currentQuestion += 1
+        title = "Question \(currentQuestion): \(countries[correctAnswer].uppercased()) , Score: \(score)"
         
         button1.setImage(UIImage(named: countries[0]), for: .normal)
         button2.setImage(UIImage(named: countries[1]), for: .normal)
