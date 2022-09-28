@@ -45,6 +45,13 @@ class ViewController: UIViewController {
         button2.setImage(UIImage(named: countries[1]), for: .normal)
         button3.setImage(UIImage(named: countries[2]), for: .normal)
     }
+    
+    func playAgain(action: UIAlertAction!) {
+        correctAnswer = 0
+        score = 0
+        currentQuestion = 0
+        askQuestion(action: nil)
+    }
     @IBAction func buttonTapped(_ sender: UIButton) {
         var title: String
         
@@ -55,13 +62,19 @@ class ViewController: UIViewController {
             title = "Wrong"
             score -= 1
         }
+        if currentQuestion < 10 {
+            let ac = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
+            //Place askQuestion rather than askQuestion() in handler can lead player to the next game. But if we place askQuestion() in handler just excute method. Besides handler need a closure.
+            //handler內放置askQuestion而不是askQuestion()的原因是，askQuestion()是程式執行的結果，但handler裡面是要放一個closure，如此一來玩家才可以再玩下一關
+            //每玩下一關都需要按下UIAlertAction，所以askQuestion程式裡需要傳入一個UIAlertAction參數，否則會出現type error，“Cannot convert value of type ‘() -> ()’ to expected argument type ‘((UIAlertAction) -> Void)?’.”
+            ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
+            present(ac, animated: true)
+        }else {
+            let ac = UIAlertController(title: title, message: "Your final score is \(score)", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Play Again", style: .default, handler: playAgain))
+            present(ac, animated: true)
+        }
         
-        let ac = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
-        //Place askQuestion rather than askQuestion() in handler can lead player to the next game. But if we place askQuestion() in handler just excute method. Besides handler need a closure.
-        //handler內放置askQuestion而不是askQuestion()的原因是，askQuestion()是程式執行的結果，但handler裡面是要放一個closure，如此一來玩家才可以再玩下一關
-        //每玩下一關都需要按下UIAlertAction，所以askQuestion程式裡需要傳入一個UIAlertAction參數，否則會出現type error，“Cannot convert value of type ‘() -> ()’ to expected argument type ‘((UIAlertAction) -> Void)?’.”
-        ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
-        present(ac, animated: true)
     }
     
 }
