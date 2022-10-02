@@ -33,6 +33,9 @@ class ViewController: UIViewController {
         button3.layer.borderColor = UIColor.lightGray.cgColor
         
         askQuestion(action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareScoreTapped))
+        navigationItem.rightBarButtonItem?.isHidden = true
+        
     }
     func askQuestion(action: UIAlertAction!) {
         // shuffle before setImage
@@ -71,11 +74,18 @@ class ViewController: UIViewController {
             present(ac, animated: true)
         }else {
             let ac = UIAlertController(title: title, message: "Your final score is \(score)", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "Play Again", style: .default, handler: playAgain))
+            ac.addAction(UIAlertAction(title: "Play again", style: .default, handler: playAgain))
+            ac.addAction(UIAlertAction(title: "Stop the game", style: .default, handler: nil))
+            navigationItem.rightBarButtonItem?.isHidden = false
             present(ac, animated: true)
         }
         
     }
-    
+    @objc func shareScoreTapped() {
+        let score = "My score: \(score)"
+        let vc = UIActivityViewController(activityItems: [score], applicationActivities: [])
+        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(vc, animated: true)
+    }
 }
 
